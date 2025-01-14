@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'title';
+  src: url('/fonts/title.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'regular';
+  src: url('/fonts/regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 루트 요소의 기본 폰트 사이즈를 10px로 변경 */
+html {
+  font-size: 62.5%;
+}
