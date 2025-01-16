@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '../Button';
 
 interface HeaderProps {
-  title: string;
+  title: '대나무' | '대나무숲' | '해우소' | '💣';
   isBoard?: boolean;
   isOwner?: boolean;
 }
