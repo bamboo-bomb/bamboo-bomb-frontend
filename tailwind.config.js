@@ -24,11 +24,11 @@ module.exports = {
       fontSize: {
         'title-1': '3rem',
         'title-2': '2rem',
-        'text-1': '1.6rem',
-        'text-2': '1.2rem',
-        'text-3': '1rem',
-        'text-4': '.8rem',
-        'text-5': '.6rem',
+        1: '1.6rem',
+        2: '1.2rem',
+        3: '1rem',
+        4: '.8rem',
+        5: '.6rem',
       },
       borderRadius: {
         xl: '.4rem',
@@ -38,5 +38,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
 };
