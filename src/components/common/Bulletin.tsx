@@ -25,11 +25,10 @@ export default function Bulletin(props: BulletinProps) {
           : 'gap-[.8rem] border-b border-b-black-20'
       }`}>
       <p className="w-full flex justify-between text-green-5">
-        <span className="text-[1.2rem]">{title}</span>
+        <span className="text-2">{title}</span>
         {isShowTime && <span className="text-green-1">{time}분 남음</span>}
       </p>
-      <p
-        className={`w-full text-[1rem] ${isBoardDetail ? '' : 'line-clamp-2'}`}>
+      <p className={`w-full text-3 ${isBoardDetail ? '' : 'line-clamp-2'}`}>
         {content}
       </p>
       <EmojiList isShowZero={isShowZero} />

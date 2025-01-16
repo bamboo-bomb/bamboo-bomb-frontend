@@ -47,7 +47,7 @@ export default function Button(props: ButtonProps) {
         ? 'bg-green-1 text-green-3'
         : 'bg-green-3 text-green-1'
     }`,
-    modal: `px-[1.5rem] py-[.8rem] rounded-2xl text-[1rem] text-green-5 ${
+    modal: `px-[1.5rem] py-[.8rem] rounded-2xl text-3 text-green-5 ${
       iconName === 'xMark' ? 'bg-green-1' : 'bg-green-2'
     }`,
     delete:
