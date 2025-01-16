@@ -22,8 +22,7 @@ export default function Layout({ children }: LayoutProps) {
     ) : null;
 
   return (
-    // TODO: border border-rose-500 삭제 예정
-    <section className="w-[32rem] h-screen m-auto border border-rose-500 font-regular">
+    <section className="w-[32rem] h-screen m-auto relative font-regular">
       {renderHeader[pathname] ?? dynamicHeader}
       {children}
     </section>
