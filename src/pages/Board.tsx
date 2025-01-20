@@ -7,8 +7,11 @@ import Modal from '../components/Modal';
 
 export default function Board() {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const closeModal = () => setIsOpenModal(false);
-  const openModal = () => setIsOpenModal(true);
+  const [isBoardButtonList, setIsBoardButtonList] = useState(false);
+
+  const toggleModal = () => setIsOpenModal(!isOpenModal);
+  const closeBoardButtonList = () => setIsBoardButtonList(false);
+  const openBoardButtonList = () => setIsBoardButtonList(true);
 
   // 게시글 모달을 열면 스크롤 비활성화, 닫으면 스크롤 활성화
   useEffect(() => {
@@ -21,8 +24,18 @@ export default function Board() {
 
   return (
     <Layout>
-      {isOpenModal && <Modal closeModal={closeModal} />}
-      <BoardButtonList openModal={openModal} />
+      {isOpenModal && (
+        <Modal
+          closeModal={toggleModal}
+          closeBoardButtonList={closeBoardButtonList}
+        />
+      )}
+      <BoardButtonList
+        openModal={toggleModal}
+        openBoardButtonList={openBoardButtonList}
+        closeBoardButtonList={closeBoardButtonList}
+        isBoardButtonList={isBoardButtonList}
+      />
       <ul className="overflow-y-auto h-[calc(100%-4.8rem)]">
         {dummy.map((item) => (
           <Bulletin

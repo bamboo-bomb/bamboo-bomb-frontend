@@ -4,14 +4,28 @@ import Button from './common/Button';
 
 interface ModalProps {
   closeModal: () => void;
+  closeBoardButtonList: () => void;
 }
-export default function Modal({ closeModal }: ModalProps) {
+
+export default function Modal(props: ModalProps) {
+  const { closeModal, closeBoardButtonList } = props;
   const contentRef = useRef<HTMLTextAreaElement>(null);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
   const [contentHeight, setContentHeight] = useState(120);
 
-  const onClickSaveButton = () => {
-    alert('게시글 게시하기');
+  const isSaveButtonDisabled = title.trim() === '' || content.trim() === '';
+
+  const onClickXMark = () => {
     closeModal();
+    closeBoardButtonList();
+  };
+
+  const onClickSaveButton = () => {
+    if (title.trim() === '') return alert('게시글 제목이 비어있습니다.');
+    if (content.trim() === '') return alert('게시글 내용이 비어있습니다.');
+    console.log('게시글 올리는 부분 작성 필요함');
+    onClickXMark();
   };
 
   // textarea의 높이를 120~280 사이가 되도록
@@ -21,6 +35,12 @@ export default function Modal({ closeModal }: ModalProps) {
     setContentHeight(newHeight);
   };
 
+  const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTitle(e.target.value);
+
+  const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+    setContent(e.target.value);
+
   return (
     <div className="w-[32rem] h-screen m-auto fixed flex items-center justify-center inset-0 z-50 bg-black-50">
       <dialog className="w-[27rem] p-[1.6rem] block relative bg-transparent rounded-xl">
@@ -29,8 +49,13 @@ export default function Modal({ closeModal }: ModalProps) {
             <MdError />이 글은 30분 후 폭파됩니다.
           </p>
           <div className="w-[8.8rem] flex justify-center gap-[.8rem]">
-            <Button type="modal" iconName="paper" onClick={onClickSaveButton} />
-            <Button type="modal" iconName="xMark" onClick={closeModal} />
+            <Button
+              kind="modal"
+              iconName="paper"
+              onClick={onClickSaveButton}
+              disabled={isSaveButtonDisabled}
+            />
+            <Button kind="modal" iconName="xMark" onClick={onClickXMark} />
           </div>
         </div>
         <div className="w-full p-[1rem] mt-[1.2rem] bg-white rounded-xl">
@@ -39,6 +64,8 @@ export default function Modal({ closeModal }: ModalProps) {
             type="text"
             name="title"
             id="title"
+            value={title}
+            onChange={onChangeTitle}
             minLength={1}
             maxLength={20}
             placeholder="20자 이내 제목을 입력해주세요"
@@ -48,6 +75,8 @@ export default function Modal({ closeModal }: ModalProps) {
             style={{ height: `${contentHeight}px` }}
             className="block w-full max-h-[28rem] p-[.4rem] text-green-5 text-3 placeholder:text-green-1 resize-none overflow-auto"
             id="content"
+            value={content}
+            onChange={onChangeContent}
             minLength={1}
             maxLength={1000}
             placeholder="1,000자 이내 내용을 입력해주세요"
