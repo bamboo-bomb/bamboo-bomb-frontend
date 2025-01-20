@@ -6,7 +6,7 @@ import dummy from '../dummy/bulletin.json';
 export default function BoardDetail() {
   return (
     <Layout>
-      <UserProfile />
+      <UserProfile time={30} />
       <Bulletin
         title={dummy[1].title}
         content={dummy[1].content}

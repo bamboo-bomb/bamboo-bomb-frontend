@@ -2,9 +2,11 @@ import Button from './common/Button';
 
 interface UserProfileProps {
   isMypage?: boolean;
+  time?: number | string;
 }
 
-export default function UserProfile({ isMypage }: UserProfileProps) {
+export default function UserProfile(props: UserProfileProps) {
+  const { isMypage = false, time } = props;
   const classList = isMypage
     ? {
         cover: 'p-[1.2rem] border-b border-b-black-20',
@@ -32,7 +34,7 @@ export default function UserProfile({ isMypage }: UserProfileProps) {
       {isMypage ? (
         <Button type="logout" content="로그아웃" onClick={onClickLogout} />
       ) : (
-        <span className="text-4 text-black-20">28분 남음</span>
+        <span className="text-4 text-black-20">{time}분 남음</span>
       )}
     </div>
   );
