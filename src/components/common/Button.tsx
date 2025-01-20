@@ -7,8 +7,8 @@ import { BiSolidTrash } from 'react-icons/bi';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { TbSend } from 'react-icons/tb';
 
-interface ButtonProps {
-  type: 'board' | 'modal' | 'delete' | 'header' | 'logout' | 'emoji';
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  kind: 'board' | 'modal' | 'delete' | 'header' | 'logout' | 'emoji';
   iconName?:
     | 'pen'
     | 'home'
@@ -19,11 +19,10 @@ interface ButtonProps {
     | 'arrow'
     | 'paper';
   content?: string;
-  onClick?: () => void;
 }
 
 export default function Button(props: ButtonProps) {
-  const { type, iconName, content, onClick } = props;
+  const { kind, iconName, content, ...restProps } = props;
 
   const iconList = {
     pen: <GoPencil />,
@@ -59,7 +58,10 @@ export default function Button(props: ButtonProps) {
   };
 
   return (
-    <button type="button" className={classList[type]} onClick={onClick}>
+    <button
+      type="button"
+      className={`disabled:cursor-not-allowed disabled:opacity-50 ${classList[kind]}`}
+      {...restProps}>
       {iconName && iconList[iconName]}
       {content && <span>{content}</span>}
     </button>

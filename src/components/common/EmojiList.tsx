@@ -21,7 +21,7 @@ export default function EmojiList({ isShowZero }: EmojiListProps) {
     <ul className="w-full flex justify-start gap-[.8rem]">
       {filteredEmojiList.map(([emoji, count], index) => (
         <li key={index}>
-          <Button type="emoji" content={`${emoji} ${count}`} />
+          <Button kind="emoji" content={`${emoji} ${count}`} />
         </li>
       ))}
     </ul>
