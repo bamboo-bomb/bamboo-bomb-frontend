@@ -28,7 +28,7 @@ export default function Bulletin(props: BulletinProps) {
         <span className="text-2">{title}</span>
         {isShowTime && <span className="text-green-1">{time}분 남음</span>}
       </p>
-      <p className={`w-full text-3 ${isBoardDetail ? '' : 'line-clamp-2'}`}>
+      <p className={`w-full text-3 ${isBoardDetail || 'line-clamp-2'}`}>
         {content}
       </p>
       <EmojiList isShowZero={isShowZero} />
