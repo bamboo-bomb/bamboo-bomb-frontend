@@ -22,8 +22,6 @@ export default function Modal(props: ModalProps) {
   };
 
   const onClickSaveButton = () => {
-    if (title.trim() === '') return alert('게시글 제목이 비어있습니다.');
-    if (content.trim() === '') return alert('게시글 내용이 비어있습니다.');
     console.log('게시글 올리는 부분 작성 필요함');
     onClickXMark();
   };
