@@ -19,12 +19,11 @@ interface ButtonProps {
     | 'arrow'
     | 'paper';
   content?: string;
-  isXMark?: boolean;
   onClick?: () => void;
 }
 
 export default function Button(props: ButtonProps) {
-  const { type, iconName, content, isXMark = false, onClick } = props;
+  const { type, iconName, content, onClick } = props;
 
   const iconList = {
     pen: <GoPencil />,
@@ -44,10 +43,12 @@ export default function Button(props: ButtonProps) {
 
   const classList = {
     board: `p-[.8rem] rounded-3xl text-[1.8rem] ${
-      isXMark ? 'bg-green-1 text-green-3' : 'bg-green-3 text-green-1'
+      iconName === 'xMark'
+        ? 'bg-green-1 text-green-3'
+        : 'bg-green-3 text-green-1'
     }`,
-    modal: `px-[1.5rem] py-[.8rem] rounded-2xl text-[1rem] text-green-5 ${
-      isXMark ? 'bg-green-1' : 'bg-green-2'
+    modal: `px-[1.5rem] py-[.8rem] rounded-2xl text-3 text-green-5 ${
+      iconName === 'xMark' ? 'bg-green-1' : 'bg-green-2'
     }`,
     delete:
       'w-full p-[.8rem] rounded-xl flex justify-center items-center gap-[.4rem] bg-green-5 text-3',

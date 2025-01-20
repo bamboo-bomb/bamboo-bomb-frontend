@@ -1,17 +1,27 @@
 import Button from './Button';
 
-const Emoji = ['👍', '❤️', '😨', '😀', '😡'];
-const count = ['1', '0', '99+', '999+', '99+'];
+const emojiList = {
+  '👍': '1',
+  '❤️': '0',
+  '😨': '99+',
+  '😀': '999+',
+  '😡': '99+',
+};
 
-export default function EmojiList() {
-  const filteredEmoji = Emoji.filter((_, index) => count[index] !== '0');
-  const filteredCount = count.filter((item) => item !== '0');
+interface EmojiListProps {
+  isShowZero?: boolean;
+}
+
+export default function EmojiList({ isShowZero }: EmojiListProps) {
+  const filteredEmojiList = Object.entries(emojiList).filter(
+    ([_, count]) => isShowZero || count !== '0'
+  );
 
   return (
     <ul className="w-full flex justify-start gap-[.8rem]">
-      {filteredEmoji.map((item, index) => (
+      {filteredEmojiList.map(([emoji, count], index) => (
         <li key={index}>
-          <Button type="emoji" content={`${item} ${filteredCount[index]}`} />
+          <Button type="emoji" content={`${emoji} ${count}`} />
         </li>
       ))}
     </ul>
