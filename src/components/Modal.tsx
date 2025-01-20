@@ -39,6 +39,7 @@ export default function Modal({ closeModal }: ModalProps) {
             type="text"
             name="title"
             id="title"
+            minLength={1}
             maxLength={20}
             placeholder="20자 이내 제목을 입력해주세요"
           />
@@ -47,6 +48,7 @@ export default function Modal({ closeModal }: ModalProps) {
             style={{ height: `${contentHeight}px` }}
             className="block w-full max-h-[28rem] p-[.4rem] text-green-5 text-3 placeholder:text-green-1 resize-none overflow-auto"
             id="content"
+            minLength={1}
             maxLength={1000}
             placeholder="1,000자 이내 내용을 입력해주세요"
             onInput={onInputHeight}></textarea>
