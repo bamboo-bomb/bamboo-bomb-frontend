@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import Header from './header/Header';
-
+import dummy from '../../dummy/bulletin.json';
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -15,10 +15,17 @@ export default function Layout({ children }: LayoutProps) {
     '/bomb': <Header title="💣" />,
   };
 
-  // TODO: isOwner의 유무 처리 필요 => 데이터베이스 있을 때
+  // TODO: userId는 로그인한 유저의 _id
+  const userId = '자몽허니블랙티';
+
+  const pathPartList = pathname.split('/');
+  const postId = pathPartList[pathPartList.length - 1];
+  const isOwner = !!dummy.find(
+    (item) => item.id === postId && item.authorId === userId
+  );
   const dynamicHeader =
     pathname.startsWith('/board/') && !renderHeader[pathname] ? (
-      <Header title="대나무" isOwner />
+      <Header title="대나무" isOwner={isOwner} />
     ) : null;
 
   return (

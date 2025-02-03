@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
 import Layout from '../components/common/Layout';
-import Bulletin from '../components/common/Bulletin';
-import dummy from '../dummy/bulletin.json';
 import BoardButtonList from '../components/BoardButtonList';
 import Modal from '../components/Modal';
-import { useNavigate } from 'react-router-dom';
+import BulletinList from '../components/common/BulletinList';
 
 export default function Board() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isBoardButtonList, setIsBoardButtonList] = useState(false);
-  const navigate = useNavigate();
+
   const toggleModal = () => setIsOpenModal(!isOpenModal);
   const closeBoardButtonList = () => setIsBoardButtonList(false);
   const openBoardButtonList = () => setIsBoardButtonList(true);
@@ -22,8 +20,6 @@ export default function Board() {
       document.body.style.overflow = '';
     };
   }, [isOpenModal]);
-
-  const onClickBulletin = (id: string | number) => navigate(`/board/${id}`);
 
   return (
     <Layout>
@@ -39,20 +35,7 @@ export default function Board() {
         closeBoardButtonList={closeBoardButtonList}
         isBoardButtonList={isBoardButtonList}
       />
-      <ul className="overflow-y-auto h-[calc(100%-4.8rem)]">
-        {dummy.map((item) => (
-          <li key={item.id} onClick={() => onClickBulletin(item.id)}>
-            <Bulletin
-              title={item.title}
-              content={item.content}
-              time={item.time}
-              reactions={item.reactions}
-              isShowZero
-              userReaction={item.userReactions?.[item.authorId] ?? null}
-            />
-          </li>
-        ))}
-      </ul>
+      <BulletinList />
     </Layout>
   );
 }

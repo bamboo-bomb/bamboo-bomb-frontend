@@ -4,7 +4,7 @@ import EmojiList from './EmojiList';
 interface BulletinProps {
   title: string;
   content: string;
-  time: number | string;
+  time?: number | string;
   reactions: ReactionListTextType;
   userReaction: null | keyof ReactionListTextType;
   isBoardDetail?: boolean;
@@ -12,6 +12,7 @@ interface BulletinProps {
   isShowZero?: boolean;
 }
 
+// TODO: time에 대한 시간 처리 해야함
 export default function Bulletin(props: BulletinProps) {
   const {
     title,
