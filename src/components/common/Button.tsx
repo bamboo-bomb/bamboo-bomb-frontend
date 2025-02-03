@@ -1,3 +1,4 @@
+import { twMerge } from 'tailwind-merge';
 import { GoPencil } from 'react-icons/go';
 import { GoHome } from 'react-icons/go';
 import { HiOutlineXMark } from 'react-icons/hi2';
@@ -53,17 +54,18 @@ export default function Button(props: ButtonProps) {
       'w-full p-[.8rem] rounded-xl flex justify-center items-center gap-[.4rem] bg-green-5 text-3',
     header: 'bg-inherit text-green-1 text-[1.8rem]',
     logout: 'px-[.8rem] py-[.4rem] bg-green-1 text-green-5 rounded-2xl ',
-    emoji:
-      'p-[.4rem] bg-green-1 text-green-3 rounded-2xl border border-green-1 active:border-green-4 focus:border-green-4',
+    emoji: 'p-[.4rem] bg-green-1 text-green-3 rounded-2xl border',
   };
-
   return (
     <button
       type="button"
-      className={`disabled:cursor-not-allowed disabled:opacity-50 ${classList[kind]}`}
-      {...restProps}>
+      {...restProps}
+      className={twMerge(
+        `disabled:cursor-not-allowed disabled:opacity-50 ${classList[kind]}`,
+        restProps.className || ''
+      )}>
       {iconName && iconList[iconName]}
-      {content && <span>{content}</span>}
+      {content && <span className="leading-none">{content}</span>}
     </button>
   );
 }
