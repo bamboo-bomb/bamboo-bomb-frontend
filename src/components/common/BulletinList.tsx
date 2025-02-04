@@ -31,7 +31,7 @@ export default function BulletinList({ isMyPage }: BulletinListProps) {
           <Bulletin
             title={item.title}
             content={item.content}
-            // time={item.time}
+            createTime={item.timestamp.date}
             reactions={item.reactions}
             userReaction={item.userReactions?.[item.authorId] ?? null}
             isShowZero

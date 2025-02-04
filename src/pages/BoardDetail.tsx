@@ -3,6 +3,8 @@ import UserProfile from '../components/UserProfile';
 import Bulletin from '../components/common/Bulletin';
 import dummy from '../dummy/bulletin.json';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getRemainingTimeForBoardDetail } from '../utils/timeUtils';
 
 export default function BoardDetail() {
   const { id } = useParams();
@@ -10,13 +12,26 @@ export default function BoardDetail() {
 
   const post = dummy.find((item) => item.id.toString() === id);
   if (!post) navigate('/bomb');
+  const createTime = post?.timestamp.date;
+  const [remainingTime, setRemainingTime] = useState(
+    getRemainingTimeForBoardDetail(createTime)
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRemainingTime(getRemainingTimeForBoardDetail(createTime));
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [createTime]);
+
   return (
     <Layout>
-      <UserProfile time={30} />
+      <UserProfile date={post?.timestamp.date} time={remainingTime} />
       <Bulletin
         title={post.title}
         content={post.content}
-        time={post.time}
+        createTime={post?.timestamp.date}
         reactions={post.reactions}
         userReaction={post.userReactions?.[post?.authorId] ?? null}
         isBoardDetail

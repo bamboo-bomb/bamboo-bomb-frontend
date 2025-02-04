@@ -2,11 +2,22 @@ import Button from './common/Button';
 
 interface UserProfileProps {
   isMypage?: boolean;
-  time?: number | string;
+  time?: string;
+  date?: string | undefined;
 }
 
+const formattedDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+
+  if (isNaN(date.getTime())) return undefined;
+
+  return `${
+    date.getMonth() + 1
+  }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+};
+
 export default function UserProfile(props: UserProfileProps) {
-  const { isMypage = false, time } = props;
+  const { isMypage = false, time, date } = props;
   const classList = isMypage
     ? {
         cover: 'p-[1.2rem] border-b border-b-black-20',
@@ -28,13 +39,17 @@ export default function UserProfile(props: UserProfileProps) {
         <img alt="" src="/images/profile.svg" className={classList.img} />
         <p className="w-full flex flex-col">
           <span className={classList.name}>지나가는 나그네</span>
-          {isMypage || <span className="text-5 text-black-20">01/09 5:34</span>}
+          {isMypage || (
+            <span className="text-5 text-black-20">
+              {date && formattedDate(date)}
+            </span>
+          )}
         </p>
       </div>
       {isMypage ? (
-        <Button type="logout" content="로그아웃" onClick={onClickLogout} />
+        <Button kind="logout" content="로그아웃" onClick={onClickLogout} />
       ) : (
-        <span className="text-4 text-black-20">{time}분 남음</span>
+        <span className="text-4 text-black-20">{time}</span>
       )}
     </div>
   );
