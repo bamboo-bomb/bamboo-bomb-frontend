@@ -1,5 +1,3 @@
-// src/utils/timeUtils.ts
-
 export function getRemainingTime(createTime?: string) {
   if (!createTime) return { text: '펑', nextUpdate: null };
 
