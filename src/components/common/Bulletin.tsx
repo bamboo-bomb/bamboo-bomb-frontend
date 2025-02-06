@@ -14,16 +14,17 @@ interface BulletinProps {
   isShowZero?: boolean;
 }
 
-export default function Bulletin({
-  title,
-  content,
-  createTime,
-  reactions,
-  userReaction,
-  isBoardDetail = false,
-  isShowTime = false,
-  isShowZero = false,
-}: BulletinProps) {
+export default function Bulletin(props: BulletinProps) {
+  const {
+    title,
+    content,
+    createTime,
+    reactions,
+    userReaction,
+    isBoardDetail = false,
+    isShowTime = false,
+    isShowZero = false,
+  } = props;
   const [remainingTime, setRemainingTime] = useState(
     getRemainingTimeForBoardDetail(createTime)
   );
