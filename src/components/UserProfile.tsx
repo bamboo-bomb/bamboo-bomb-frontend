@@ -9,7 +9,7 @@ interface UserProfileProps {
 const formattedDate = (dateStr: string) => {
   const date = new Date(dateStr);
 
-  if (isNaN(date.getTime())) return undefined;
+  if (isNaN(date.getTime())) return null;
 
   return `${
     date.getMonth() + 1
